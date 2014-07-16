@@ -1,4 +1,0 @@
-career
-======
-
-Example text.

@@ -8,3 +8,6 @@ pip-log.txt
 .virtualenvs
 .viminfo
 .vim
+/dist/
+*.xml
+*egg-info*
