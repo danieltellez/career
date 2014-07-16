@@ -2,8 +2,8 @@
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from webapp.models import Student, Teacher, Quiz, Question, Career
-from webapp.forms import StudentForm, TeacherForm, QuizForm, QuestionForm, CareerForm
+from career.models import Student, Teacher, Quiz, Question, Career
+from career.forms import StudentForm, TeacherForm, QuizForm, QuestionForm, CareerForm
 
 
 def home(request):
@@ -11,7 +11,7 @@ def home(request):
     if request.user.is_authenticated():
         context = {
         }
-        return render(request, 'webapp/home.html', context)
+        return render(request, 'career/home.html', context)
     
 
 @login_required
@@ -21,13 +21,13 @@ def student_view(request, pk=None):
         context = {
             'students': students
         }
-        return render(request, 'webapp/student_list_view.html', context)
+        return render(request, 'career/student_list_view.html', context)
     else:
         student = Student.objects.get(pk=pk)
         context = {
             'student': student
         }
-        return render(request, 'webapp/student_view.html', context)
+        return render(request, 'career/student_view.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def student_delete(request, pk):
@@ -49,7 +49,7 @@ def student_edit(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'webapp/student_edit.html', context)
+    return render(request, 'career/student_edit.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def student_add(request):
@@ -62,7 +62,7 @@ def student_add(request):
     context = {
         'form': form
     }
-    return render(request, 'webapp/student_edit.html', context)
+    return render(request, 'career/student_edit.html', context)
 
 @login_required
 def teacher_view(request, pk=None):
@@ -71,13 +71,13 @@ def teacher_view(request, pk=None):
         context = {
             'teachers': teachers
         }
-        return render(request, 'webapp/teacher_list_view.html', context)
+        return render(request, 'career/teacher_list_view.html', context)
     else:
         teacher = Teacher.objects.get(pk=pk)
         context = {
             'teacher': teacher
         }
-        return render(request, 'webapp/teacher_view.html', context)
+        return render(request, 'career/teacher_view.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def teacher_delete(request, pk):
@@ -99,7 +99,7 @@ def teacher_edit(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'webapp/teacher_edit.html', context)
+    return render(request, 'career/teacher_edit.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def teacher_add(request):
@@ -112,7 +112,7 @@ def teacher_add(request):
     context = {
         'form': form
     }
-    return render(request, 'webapp/teacher_edit.html', context)
+    return render(request, 'career/teacher_edit.html', context)
 
 @login_required
 def quiz_view(request, pk=None):
@@ -121,13 +121,13 @@ def quiz_view(request, pk=None):
         context = {
             'quizzes': quizzes
         }
-        return render(request, 'webapp/quiz_list_view.html', context)
+        return render(request, 'career/quiz_list_view.html', context)
     else:
         quiz = Quiz.objects.get(pk=pk)
         context = {
             'quiz': quiz
         }
-        return render(request, 'webapp/quiz_view.html', context)
+        return render(request, 'career/quiz_view.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def quiz_delete(request, pk):
@@ -149,7 +149,7 @@ def quiz_edit(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'webapp/quiz_edit.html', context)
+    return render(request, 'career/quiz_edit.html', context)
 
 @login_required
 def quiz_add_question(request, pk):
@@ -166,7 +166,7 @@ def quiz_add_question(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'webapp/quiz_add_question.html', context)
+    return render(request, 'career/quiz_add_question.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def quiz_add(request):
@@ -179,7 +179,7 @@ def quiz_add(request):
     context = {
         'form': form
     }
-    return render(request, 'webapp/quiz_edit.html', context)
+    return render(request, 'career/quiz_edit.html', context)
 
 @login_required
 def career_view(request, pk=None):
@@ -188,13 +188,13 @@ def career_view(request, pk=None):
         context = {
             'careers': careers
         }
-        return render(request, 'webapp/career_list_view.html', context)
+        return render(request, 'career/career_list_view.html', context)
     else:
         career = Career.objects.get(pk=pk)
         context = {
             'career': career
         }
-        return render(request, 'webapp/career_view.html', context)
+        return render(request, 'career/career_view.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def career_delete(request, pk):
@@ -216,7 +216,7 @@ def career_edit(request, pk):
     context = {
         'form': form
     }
-    return render(request, 'webapp/career_edit.html', context)
+    return render(request, 'career/career_edit.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def career_add(request):
@@ -229,4 +229,4 @@ def career_add(request):
     context = {
         'form': form
     }
-    return render(request, 'webapp/career_edit.html', context)
+    return render(request, 'career/career_edit.html', context)

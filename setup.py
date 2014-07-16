@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from hvad import __version__ as version
+from career import __version__ as version
 
 with open('README.rst') as f:
     long_description = f.read()
@@ -16,7 +16,6 @@ setup(
         exclude = [
             'testproject',
             'testproject.app',
-            'hvad.tests',
         ],
     ),
     zip_safe=False,

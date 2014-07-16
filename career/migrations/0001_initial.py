@@ -9,149 +9,149 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'QuizTranslation'
-        db.create_table('webapp_quiz_translation', (
+        db.create_table('career_quiz_translation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=256, null=True, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('language_code', self.gf('django.db.models.fields.CharField')(max_length=15, db_index=True)),
-            ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['webapp.Quiz'])),
+            ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['career.Quiz'])),
         ))
-        db.send_create_signal('webapp', ['QuizTranslation'])
+        db.send_create_signal('career', ['QuizTranslation'])
 
         # Adding unique constraint on 'QuizTranslation', fields ['language_code', 'master']
-        db.create_unique('webapp_quiz_translation', ['language_code', 'master_id'])
+        db.create_unique('career_quiz_translation', ['language_code', 'master_id'])
 
         # Adding model 'Quiz'
-        db.create_table('webapp_quiz', (
+        db.create_table('career_quiz', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('short_description', self.gf('django.db.models.fields.CharField')(max_length=128)),
         ))
-        db.send_create_signal('webapp', ['Quiz'])
+        db.send_create_signal('career', ['Quiz'])
 
         # Adding model 'AnswerTranslation'
-        db.create_table('webapp_answer_translation', (
+        db.create_table('career_answer_translation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('language_code', self.gf('django.db.models.fields.CharField')(max_length=15, db_index=True)),
-            ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['webapp.Answer'])),
+            ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['career.Answer'])),
         ))
-        db.send_create_signal('webapp', ['AnswerTranslation'])
+        db.send_create_signal('career', ['AnswerTranslation'])
 
         # Adding unique constraint on 'AnswerTranslation', fields ['language_code', 'master']
-        db.create_unique('webapp_answer_translation', ['language_code', 'master_id'])
+        db.create_unique('career_answer_translation', ['language_code', 'master_id'])
 
         # Adding model 'Answer'
-        db.create_table('webapp_answer', (
+        db.create_table('career_answer', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('short_description', self.gf('django.db.models.fields.CharField')(max_length=128)),
         ))
-        db.send_create_signal('webapp', ['Answer'])
+        db.send_create_signal('career', ['Answer'])
 
         # Adding model 'QuestionTranslation'
-        db.create_table('webapp_question_translation', (
+        db.create_table('career_question_translation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=256, null=True, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('help_text', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('language_code', self.gf('django.db.models.fields.CharField')(max_length=15, db_index=True)),
-            ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['webapp.Question'])),
+            ('master', self.gf('django.db.models.fields.related.ForeignKey')(related_name='translations', null=True, to=orm['career.Question'])),
         ))
-        db.send_create_signal('webapp', ['QuestionTranslation'])
+        db.send_create_signal('career', ['QuestionTranslation'])
 
         # Adding unique constraint on 'QuestionTranslation', fields ['language_code', 'master']
-        db.create_unique('webapp_question_translation', ['language_code', 'master_id'])
+        db.create_unique('career_question_translation', ['language_code', 'master_id'])
 
         # Adding model 'Question'
-        db.create_table('webapp_question', (
+        db.create_table('career_question', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('short_description', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['webapp.Quiz'])),
+            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['career.Quiz'])),
             ('order', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
         ))
-        db.send_create_signal('webapp', ['Question'])
+        db.send_create_signal('career', ['Question'])
 
         # Adding model 'QuizToCareer'
-        db.create_table('webapp_quiztocareer', (
+        db.create_table('career_quiztocareer', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['webapp.Quiz'])),
-            ('career', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['webapp.Career'])),
+            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['career.Quiz'])),
+            ('career', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['career.Career'])),
             ('passed', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('due_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
         ))
-        db.send_create_signal('webapp', ['QuizToCareer'])
+        db.send_create_signal('career', ['QuizToCareer'])
 
         # Adding model 'Career'
-        db.create_table('webapp_career', (
+        db.create_table('career_career', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
-        db.send_create_signal('webapp', ['Career'])
+        db.send_create_signal('career', ['Career'])
 
         # Adding model 'Student'
-        db.create_table('webapp_student', (
+        db.create_table('career_student', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
-        db.send_create_signal('webapp', ['Student'])
+        db.send_create_signal('career', ['Student'])
 
         # Adding model 'Teacher'
-        db.create_table('webapp_teacher', (
+        db.create_table('career_teacher', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
-        db.send_create_signal('webapp', ['Teacher'])
+        db.send_create_signal('career', ['Teacher'])
 
         # Adding model 'StudentToTeacher'
-        db.create_table('webapp_studenttoteacher', (
+        db.create_table('career_studenttoteacher', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('student', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['webapp.Student'])),
-            ('teacher', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['webapp.Teacher'])),
+            ('student', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['career.Student'])),
+            ('teacher', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['career.Teacher'])),
         ))
-        db.send_create_signal('webapp', ['StudentToTeacher'])
+        db.send_create_signal('career', ['StudentToTeacher'])
 
 
     def backwards(self, orm):
         # Removing unique constraint on 'QuestionTranslation', fields ['language_code', 'master']
-        db.delete_unique('webapp_question_translation', ['language_code', 'master_id'])
+        db.delete_unique('career_question_translation', ['language_code', 'master_id'])
 
         # Removing unique constraint on 'AnswerTranslation', fields ['language_code', 'master']
-        db.delete_unique('webapp_answer_translation', ['language_code', 'master_id'])
+        db.delete_unique('career_answer_translation', ['language_code', 'master_id'])
 
         # Removing unique constraint on 'QuizTranslation', fields ['language_code', 'master']
-        db.delete_unique('webapp_quiz_translation', ['language_code', 'master_id'])
+        db.delete_unique('career_quiz_translation', ['language_code', 'master_id'])
 
         # Deleting model 'QuizTranslation'
-        db.delete_table('webapp_quiz_translation')
+        db.delete_table('career_quiz_translation')
 
         # Deleting model 'Quiz'
-        db.delete_table('webapp_quiz')
+        db.delete_table('career_quiz')
 
         # Deleting model 'AnswerTranslation'
-        db.delete_table('webapp_answer_translation')
+        db.delete_table('career_answer_translation')
 
         # Deleting model 'Answer'
-        db.delete_table('webapp_answer')
+        db.delete_table('career_answer')
 
         # Deleting model 'QuestionTranslation'
-        db.delete_table('webapp_question_translation')
+        db.delete_table('career_question_translation')
 
         # Deleting model 'Question'
-        db.delete_table('webapp_question')
+        db.delete_table('career_question')
 
         # Deleting model 'QuizToCareer'
-        db.delete_table('webapp_quiztocareer')
+        db.delete_table('career_quiztocareer')
 
         # Deleting model 'Career'
-        db.delete_table('webapp_career')
+        db.delete_table('career_career')
 
         # Deleting model 'Student'
-        db.delete_table('webapp_student')
+        db.delete_table('career_student')
 
         # Deleting model 'Teacher'
-        db.delete_table('webapp_teacher')
+        db.delete_table('career_teacher')
 
         # Deleting model 'StudentToTeacher'
-        db.delete_table('webapp_studenttoteacher')
+        db.delete_table('career_studenttoteacher')
 
 
     models = {
@@ -191,78 +191,78 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'webapp.answer': {
+        'career.answer': {
             'Meta': {'object_name': 'Answer'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'short_description': ('django.db.models.fields.CharField', [], {'max_length': '128'})
         },
-        'webapp.answertranslation': {
-            'Meta': {'unique_together': "[('language_code', 'master')]", 'object_name': 'AnswerTranslation', 'db_table': "'webapp_answer_translation'"},
+        'career.answertranslation': {
+            'Meta': {'unique_together': "[('language_code', 'master')]", 'object_name': 'AnswerTranslation', 'db_table': "'career_answer_translation'"},
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'language_code': ('django.db.models.fields.CharField', [], {'max_length': '15', 'db_index': 'True'}),
-            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'null': 'True', 'to': "orm['webapp.Answer']"})
+            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'null': 'True', 'to': "orm['career.Answer']"})
         },
-        'webapp.career': {
+        'career.career': {
             'Meta': {'object_name': 'Career'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'quizzes': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['webapp.Quiz']", 'null': 'True', 'through': "orm['webapp.QuizToCareer']", 'blank': 'True'}),
+            'quizzes': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['career.Quiz']", 'null': 'True', 'through': "orm['career.QuizToCareer']", 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'webapp.question': {
+        'career.question': {
             'Meta': {'object_name': 'Question'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Quiz']"}),
+            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['career.Quiz']"}),
             'short_description': ('django.db.models.fields.CharField', [], {'max_length': '128'})
         },
-        'webapp.questiontranslation': {
-            'Meta': {'unique_together': "[('language_code', 'master')]", 'object_name': 'QuestionTranslation', 'db_table': "'webapp_question_translation'"},
+        'career.questiontranslation': {
+            'Meta': {'unique_together': "[('language_code', 'master')]", 'object_name': 'QuestionTranslation', 'db_table': "'career_question_translation'"},
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'help_text': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'language_code': ('django.db.models.fields.CharField', [], {'max_length': '15', 'db_index': 'True'}),
-            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'null': 'True', 'to': "orm['webapp.Question']"}),
+            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'null': 'True', 'to': "orm['career.Question']"}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'})
         },
-        'webapp.quiz': {
+        'career.quiz': {
             'Meta': {'object_name': 'Quiz'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'short_description': ('django.db.models.fields.CharField', [], {'max_length': '128'})
         },
-        'webapp.quiztocareer': {
+        'career.quiztocareer': {
             'Meta': {'object_name': 'QuizToCareer'},
-            'career': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Career']"}),
+            'career': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['career.Career']"}),
             'due_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'passed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Quiz']"})
+            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['career.Quiz']"})
         },
-        'webapp.quiztranslation': {
-            'Meta': {'unique_together': "[('language_code', 'master')]", 'object_name': 'QuizTranslation', 'db_table': "'webapp_quiz_translation'"},
+        'career.quiztranslation': {
+            'Meta': {'unique_together': "[('language_code', 'master')]", 'object_name': 'QuizTranslation', 'db_table': "'career_quiz_translation'"},
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'language_code': ('django.db.models.fields.CharField', [], {'max_length': '15', 'db_index': 'True'}),
-            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'null': 'True', 'to': "orm['webapp.Quiz']"}),
+            'master': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'null': 'True', 'to': "orm['career.Quiz']"}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'})
         },
-        'webapp.student': {
+        'career.student': {
             'Meta': {'object_name': 'Student'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'webapp.studenttoteacher': {
+        'career.studenttoteacher': {
             'Meta': {'object_name': 'StudentToTeacher'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'student': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Student']"}),
-            'teacher': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['webapp.Teacher']"})
+            'student': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['career.Student']"}),
+            'teacher': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['career.Teacher']"})
         },
-        'webapp.teacher': {
+        'career.teacher': {
             'Meta': {'object_name': 'Teacher'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'students': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['webapp.Student']", 'null': 'True', 'through': "orm['webapp.StudentToTeacher']", 'blank': 'True'}),
+            'students': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['career.Student']", 'null': 'True', 'through': "orm['career.StudentToTeacher']", 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         }
     }
 
-    complete_apps = ['webapp']
+    complete_apps = ['career']

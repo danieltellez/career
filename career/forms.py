@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from webapp.models import Student, Teacher, Quiz, Question, Career
+from career.models import Student, Teacher, Quiz, Question, Career
 
 class StudentForm(forms.ModelForm):
     class Meta:
