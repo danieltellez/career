@@ -1,0 +1,15 @@
+{% extends "webapp/base.html" %}
+{% load i18n %}
+
+{% block body_content %}
+
+<h1>{% trans 'Add new question to Quiz' %}</h1>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.as_table }}
+  <input type="submit" value="{% trans 'Submit' %}">
+</form>
+
+{% endblock %}
+

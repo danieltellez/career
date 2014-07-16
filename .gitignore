@@ -1,0 +1,10 @@
+*.py[co]
+*~
+*.swp
+*.db
+*.mo
+pip-log.txt
+.ropeproject
+.virtualenvs
+.viminfo
+.vim

@@ -1,0 +1,16 @@
+{% extends "webapp/base.html" %}
+{% load i18n %}
+
+{% block body_content %}
+
+<h1>{% trans 'Add new Teacher' %}</h1>
+<p>{% trans 'Pick a user to create a teacher' %}</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="{% trans 'Submit' %}">
+</form>
+
+{% endblock %}
+

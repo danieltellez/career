@@ -1,0 +1,12 @@
+{% extends "webapp/base.html" %}
+{% load i18n %}
+
+{% block body_content %}
+
+<h1>{% trans "Quiz" %} <small>{{ quiz }}</small></h1>
+
+{% for question in quiz.get_questions %}
+{{ question.short_description }}
+{% endfor %}
+
+{% endblock %}

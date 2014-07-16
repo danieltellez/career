@@ -1,0 +1,15 @@
+{% extends "webapp/base.html" %}
+{% load i18n %}
+
+{% block body_content %}
+
+<ul>
+  {% for quiz in quizzes %}
+  <li><a href="{% url quiz_view pk=quiz.id %}">{{ quiz }}</a> [<a href="{% url quiz_delete pk=quiz.id %}">x</a>]</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url quiz_add %}">{% trans "Add new Quiz" %}</a>
+
+{% endblock %}
+

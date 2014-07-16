@@ -1,0 +1,10 @@
+{% extends "webapp/base.html" %}
+{% load i18n career %}
+
+{% block body_content %}
+
+<h2>Hello, {{ user }}</h2>
+
+{% get_careers user=user %}
+
+{% endblock %}
